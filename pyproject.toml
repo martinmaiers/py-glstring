@@ -1,0 +1,62 @@
+[project]
+name = "glstring"
+version = "0.1.0"
+description = "A standards-conformant Python library for parsing, manipulating, validating, and serializing Genotype List (GL) Strings (GL String 1.1)."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Society for Immune Polymorphism (SIP)" }]
+keywords = [
+    "HLA",
+    "KIR",
+    "immunogenetics",
+    "GL String",
+    "genotype list string",
+    "genotyping",
+    "parser",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Typing :: Typed",
+]
+# The parser and AST have zero runtime dependencies by design (spec item 12).
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.5", "hypothesis>=6.0"]
+
+[project.scripts]
+glstring = "glstring.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/societyforimmunepolymorphism/py-glstring"
+Repository = "https://github.com/societyforimmunepolymorphism/py-glstring"
+Issues = "https://github.com/societyforimmunepolymorphism/py-glstring/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/glstring"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "UP", "B", "W", "C4", "SIM"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E501"]
